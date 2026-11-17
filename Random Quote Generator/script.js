@@ -34,9 +34,22 @@ async function randomQuote() {
 
 soundBtn.addEventListener("click", () => {
   // the SpeechSynthesisUtterance is a web speech api that represents a speech request
-  let utterance = new SpeechSynthesisUtterance(`${quoteText.innerText}`);
+  let utterance = new SpeechSynthesisUtterance(
+    `${quoteText.innerText} by ${authorName.innerText}`,
+  );
   //   speak method of SpeechSynthesis speaks the utterance
   speechSynthesis.speak(utterance);
+});
+
+copyBtn.addEventListener("click", () => {
+  // copying the quote text on copyBtn click
+  // writeText() property writes the specified text string to the system clipboard.
+  navigator.clipboard.writeText(quoteText.innerText);
+});
+
+twitterXBtn.addEventListener("click", () => {
+  let tweetUrl = `https://x.com/intent/tweet?url=${quoteText.innerText}`;
+  window.open(tweetUrl, "_blank"); // opening a new x tab with passing quote in the url
 });
 
 quoteBtn.addEventListener("click", randomQuote);
